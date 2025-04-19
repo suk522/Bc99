@@ -19,7 +19,15 @@ function generatePartyNumber() {
 }
 
 function addBet(type, amount) {
-    const selectedButton = document.querySelector('.betting-options button.selected');
+    const allButtons = document.querySelectorAll('.color-btn, .number-btn, .size-btn');
+    let selectedButton = null;
+    
+    allButtons.forEach(btn => {
+        if (btn.classList.contains('selected')) {
+            selectedButton = btn;
+        }
+    });
+    
     const betType = selectedButton ? selectedButton.textContent : type;
     bettingHistory.unshift({
         partyNumber: currentPartyNumber,
@@ -169,6 +177,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const betPrompt = document.getElementById('betPrompt');
     const allBetButtons = document.querySelectorAll('.color-btn, .number-btn, .size-btn');
+    
+    allBetButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            allBetButtons.forEach(b => b.classList.remove('selected'));
+            e.target.classList.add('selected');
+            showBetPrompt();
+        });
+    });
     
     allBetButtons.forEach(btn => {
         btn.addEventListener('click', showBetPrompt);

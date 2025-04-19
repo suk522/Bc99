@@ -111,15 +111,21 @@ function updateGlobalBalance(newBalance) {
 function updateTimer() {
     const timerDisplay = document.querySelector('.timer span');
     const partyDisplay = document.querySelector('.round-number');
+    const resultBall = document.querySelector('.result-ball:not(.small)');
 
     timerDisplay.textContent = `00:${timeLeft.toString().padStart(2, '0')}`;
     partyDisplay.textContent = currentPartyNumber;
+
+    if (timeLeft === 25) {
+        resultBall.classList.add('spinning');
+    }
 
     if (timeLeft === 0) {
         generateResult();
         timeLeft = 30;
         currentRound++;
         currentPartyNumber = generatePartyNumber();
+        resultBall.classList.remove('spinning');
     }
     timeLeft--;
 }

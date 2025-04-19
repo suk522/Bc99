@@ -331,6 +331,20 @@ main {
     cursor: pointer;
 }
 
+.back-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.back-link a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
 .admin-header {
     display: flex;
     justify-content: space-between;

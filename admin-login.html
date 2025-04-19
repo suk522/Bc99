@@ -10,12 +10,16 @@
 <body>
     <main class="admin-login">
         <div class="login-card">
-            <h1>Admin Login</h1>
+            <h1>BC99 Admin</h1>
+            <p>Login to access admin panel</p>
             <form id="adminLoginForm" onsubmit="return handleLogin(event)">
                 <input type="text" id="username" placeholder="Username" required>
                 <input type="password" id="password" placeholder="Password" required>
                 <button type="submit">Login</button>
             </form>
+            <div class="back-link">
+                <a href="index.html">← Back to main site</a>
+            </div>
         </div>
     </main>
     <script>
@@ -24,7 +28,6 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // Admin credentials (in production, this should be server-side)
             if (username === 'admin' && password === 'bc99admin') {
                 localStorage.setItem('adminAuth', 'true');
                 window.location.href = 'admin.html';

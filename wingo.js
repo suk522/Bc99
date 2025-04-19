@@ -128,6 +128,13 @@ function generateResult() {
     const number = Math.floor(Math.random() * 10);
     const resultBall = document.querySelector('.result-ball:not(.small)');
     const lastResults = document.querySelectorAll('.result-ball.small');
+    
+    // Start spinning before showing result
+    resultBall.classList.add('spinning');
+    
+    // Show result after 5 seconds
+    setTimeout(() => {
+        resultBall.classList.remove('spinning');
 
     // Shift previous results
     for (let i = lastResults.length - 1; i > 0; i--) {
@@ -155,10 +162,16 @@ function generateResult() {
 
         resultBall.style.opacity = '1';
         resultBall.style.transform = 'scale(1)';
+        
+        // Add spinning class again after 5 seconds
+        setTimeout(() => {
+            resultBall.classList.add('spinning');
+        }, 5000);
     }
 
     updateGameResult(number);
     currentPartyNumber = generatePartyNumber();
+}, 5000);
 }
 
 function updateGameHistory() {

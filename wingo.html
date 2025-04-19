@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BC99 - Wingo Game</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="wingo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="wingo-container">
+        <header class="wingo-header">
+            <a href="index.html" class="back-btn">←</a>
+            <h1>Daman</h1>
+            <div class="user-icons">
+                <span class="chat-icon">💬</span>
+                <span class="profile-icon">👤</span>
+            </div>
+        </header>
+
+        <div class="balance-info">
+            <div class="balance-text">Balance</div>
+            <div class="balance-amount">₹10,000</div>
+            <div class="balance-actions">
+                <button class="action-btn deposit">⬇️</button>
+                <button class="action-btn withdraw">⬆️</button>
+            </div>
+        </div>
+
+        <div class="result-display">
+            <div class="result-label">Result:</div>
+            <div class="number-display">
+                <span class="result-number green">6</span>
+            </div>
+            <div class="timer">
+                <span>00:10</span>
+                <div class="round-number">00004</div>
+            </div>
+        </div>
+
+        <div class="betting-options">
+            <button class="color-btn green">Green</button>
+            <button class="color-btn violet">Violet</button>
+            <button class="color-btn red">Red</button>
+            
+            <div class="number-grid">
+                <button class="number-btn violet">0</button>
+                <button class="number-btn red">1</button>
+                <button class="number-btn green">2</button>
+                <button class="number-btn red">3</button>
+                <button class="number-btn green">4</button>
+                <button class="number-btn violet">5</button>
+                <button class="number-btn green">6</button>
+                <button class="number-btn red">7</button>
+                <button class="number-btn green">8</button>
+                <button class="number-btn red">9</button>
+            </div>
+
+            <div class="size-buttons">
+                <button class="size-btn">Big</button>
+                <button class="size-btn">Small</button>
+            </div>
+        </div>
+
+        <div class="history-tabs">
+            <button class="tab-btn active">Game history</button>
+            <button class="tab-btn">My history</button>
+        </div>
+    </div>
+    <script src="wingo.js"></script>
+</body>
+</html>

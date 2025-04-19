@@ -1,0 +1,150 @@
+
+.wingo-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.wingo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    color: white;
+}
+
+.back-btn {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+}
+
+.user-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.balance-info {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 20px 0;
+    color: black;
+}
+
+.balance-amount {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.balance-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+}
+
+.result-display {
+    background: linear-gradient(135deg, #800080, #ff0000);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.number-display {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.result-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.result-number.green {
+    background: #4CAF50;
+}
+
+.timer {
+    text-align: right;
+    font-size: 20px;
+}
+
+.betting-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.color-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.color-btn.green { background: #4CAF50; }
+.color-btn.violet { background: #9C27B0; }
+.color-btn.red { background: #f44336; }
+
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.number-btn {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.size-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.size-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #FF9800;
+    color: white;
+    font-weight: bold;
+}
+
+.history-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.tab-btn {
+    padding: 10px;
+    border: none;
+    background: #f44336;
+    color: white;
+    border-radius: 5px;
+}
+
+.tab-btn.active {
+    background: white;
+    color: #f44336;
+}

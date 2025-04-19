@@ -78,6 +78,19 @@
     font-size: 24px;
     border: 2px solid rgba(255,255,255,0.3);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    color: white;
+}
+
+.result-ball.green {
+    background: linear-gradient(135deg, #388E3C, #4CAF50);
+}
+
+.result-ball.violet {
+    background: linear-gradient(135deg, #6a1b9a, #9c27b0);
+}
+
+.result-ball.red {
+    background: linear-gradient(135deg, #d32f2f, #f44336);
 }
 
 .timer {

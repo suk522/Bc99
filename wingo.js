@@ -94,6 +94,7 @@ function generateResult() {
         resultBall.textContent = number;
         resultBall.className = 'result-ball';
         
+        // Example: if number is 2, ball will be green
         if (number === 0 || number === 5) {
             resultBall.classList.add('violet');
         } else if ([2,4,6,8].includes(number)) {
@@ -101,6 +102,9 @@ function generateResult() {
         } else {
             resultBall.classList.add('red');
         }
+
+        resultBall.style.opacity = '1';
+        resultBall.style.transform = 'scale(1)';
     }
     
     updateGameResult(number);

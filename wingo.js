@@ -154,49 +154,38 @@ function generateResult() {
     // Start spinning before showing result
     resultBall.classList.add('spinning');
     
-    // Store the final rotation number
-    let finalRotationNum = number;
-    let isRotating = true;
+    let rotations = 0;
+    const maxRotations = 10;
     
-    // Update rotation numbers
-    let rotationCount = 0;
     rotationInterval = setInterval(() => {
-        if (isRotating) {
-            rotationCount++;
-            const timeLeft = parseInt(document.querySelector('.timer span').textContent.split(':')[1]);
-            
-            // Show final number on last rotation
-            if (timeLeft <= 26 || rotationCount >= 8) {
-                resultBall.textContent = finalRotationNum;
-                isRotating = false;
-                clearInterval(rotationInterval);
-                
-                // Set final color
-                resultBall.className = 'result-ball';
-                if (finalRotationNum === 0 || finalRotationNum === 5) {
-                    resultBall.classList.add('violet');
-                } else if ([2,4,6,8].includes(finalRotationNum)) {
-                    resultBall.classList.add('green');
-                } else {
-                    resultBall.classList.add('red');
-                }
+        rotations++;
+        
+        if (rotations >= maxRotations) {
+            // Show final result
+            clearInterval(rotationInterval);
+            resultBall.textContent = number;
+            resultBall.className = 'result-ball';
+            if (number === 0 || number === 5) {
+                resultBall.classList.add('violet');
+            } else if ([2,4,6,8].includes(number)) {
+                resultBall.classList.add('green');
             } else {
-                const randomNum = Math.floor(Math.random() * 10);
-                resultBall.textContent = rotationCount === 7 ? finalRotationNum : randomNum;
-                resultBall.className = 'result-ball spinning';
-                
-                // Set color for current number
-                const currentNum = rotationCount === 7 ? finalRotationNum : randomNum;
-                if (currentNum === 0 || currentNum === 5) {
-                    resultBall.classList.add('violet');
-                } else if ([2,4,6,8].includes(currentNum)) {
-                    resultBall.classList.add('green');
-                } else {
-                    resultBall.classList.add('red');
-                }
+                resultBall.classList.add('red');
+            }
+        } else {
+            // Show random numbers during rotation
+            const randomNum = rotations === maxRotations - 1 ? number : Math.floor(Math.random() * 10);
+            resultBall.textContent = randomNum;
+            resultBall.className = 'result-ball spinning';
+            if (randomNum === 0 || randomNum === 5) {
+                resultBall.classList.add('violet');
+            } else if ([2,4,6,8].includes(randomNum)) {
+                resultBall.classList.add('green');
+            } else {
+                resultBall.classList.add('red');
             }
         }
-    }, 500);
+    }, 300);
     
     // Show result after 5 seconds
     setTimeout(() => {

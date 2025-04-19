@@ -43,5 +43,17 @@
             <a href="#">Account</a>
         </div>
     </nav>
+<script>
+        document.addEventListener('click', e => {
+            const link = e.target.closest('a');
+            if (link && link.href && !link.target && !e.ctrlKey && !e.shiftKey) {
+                e.preventDefault();
+                document.body.classList.add('page-transition');
+                setTimeout(() => {
+                    window.location = link.href;
+                }, 200);
+            }
+        });
+    </script>
 </body>
 </html>

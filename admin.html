@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BC99 - Admin Panel</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="admin.js"></script>
+</head>
+<body>
+    <main class="admin-page">
+        <h1>Admin Panel</h1>
+        <div class="admin-tabs">
+            <button class="tab-btn active" onclick="showTab('withdrawals')">Withdrawals</button>
+            <button class="tab-btn" onclick="showTab('deposits')">Deposits</button>
+            <button class="tab-btn" onclick="showTab('users')">Users</button>
+        </div>
+        
+        <div id="withdrawals" class="tab-content active">
+            <h2>Withdrawal Records</h2>
+            <div class="admin-table" id="withdrawalsTable"></div>
+        </div>
+        
+        <div id="deposits" class="tab-content">
+            <h2>Deposit Records</h2>
+            <div class="admin-table" id="depositsTable"></div>
+        </div>
+        
+        <div id="users" class="tab-content">
+            <h2>User Management</h2>
+            <div class="admin-table" id="usersTable"></div>
+        </div>
+    </main>
+</body>
+</html>

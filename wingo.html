@@ -89,10 +89,23 @@
         </div>
 
         <div class="history-tabs">
-            <button class="tab-btn active">Game history</button>
-            <button class="tab-btn">My history</button>
+            <button class="tab-btn active" onclick="showHistory('game')">Game history</button>
+            <button class="tab-btn" onclick="showHistory('betting')">My history</button>
+        </div>
+        <div class="history-content">
+            <div class="game-history"></div>
+            <div class="betting-history" style="display: none;"></div>
         </div>
     </div>
+    <script>
+        function showHistory(type) {
+            document.querySelector('.game-history').style.display = type === 'game' ? 'block' : 'none';
+            document.querySelector('.betting-history').style.display = type === 'betting' ? 'block' : 'none';
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase().includes(type));
+            });
+        }
+    </script>
     <script src="wingo.js"></script>
 </body>
 </html>

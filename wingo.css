@@ -235,9 +235,66 @@
 .tab-btn {
     padding: 10px;
     border: none;
-    background: #f44336;
+    background: #333;
     color: white;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: #f44336;
+}
+
+.history-content {
+    margin-top: 15px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    color: white;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.pending {
+    color: #ffd700;
+}
+
+.status.win {
+    color: #4CAF50;
+}
+
+.status.loss {
+    color: #f44336;
+}
+
+.result {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.result.violet {
+    background: #9c27b0;
+}
+
+.result.green {
+    background: #4CAF50;
+}
+
+.result.red {
+    background: #f44336;
 }
 
 .tab-btn.active {

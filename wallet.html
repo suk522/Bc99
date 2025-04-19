@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BC99 - Wallet</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="script.js"></script>
 </head>
 <body>
     <main class="wallet-page">
@@ -17,9 +18,11 @@
                 </button>
             </div>
             <div class="balance-amount">$1,000.00</div>
+            <div class="bank-status" id="bankStatus">No bank account linked</div>
             <div class="action-buttons">
                 <button class="withdraw-btn">Withdraw</button>
                 <button class="deposit-btn">Deposit</button>
+                <button class="bind-bank-btn" onclick="bindBank()">Bind Bank</button>
             </div>
         </section>
 

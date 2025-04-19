@@ -183,6 +183,17 @@ main {
     color: var(--primary);
 }
 
+.bind-bank-btn {
+    background-color: #4a148c;
+    color: var(--light);
+}
+
+.bank-status {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.8);
+    margin: 0.5rem 0;
+}
+
 .history-section {
     background: var(--dark);
     border-radius: 15px;

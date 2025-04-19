@@ -19,9 +19,11 @@ function generatePartyNumber() {
 }
 
 function addBet(type, amount) {
+    const selectedButton = document.querySelector('.betting-options button.selected');
+    const betType = selectedButton ? selectedButton.textContent : type;
     bettingHistory.unshift({
         partyNumber: currentPartyNumber,
-        type: type,
+        type: betType,
         amount: amount,
         status: 'pending',
         winAmount: 0

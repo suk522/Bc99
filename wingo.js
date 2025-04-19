@@ -135,8 +135,11 @@ function updateTimer() {
         }, 500);
     }
 
-    if (timeLeft === 0) {
+    if (timeLeft === 1) {
         generateResult();
+    }
+
+    if (timeLeft === 0) {
         timeLeft = 30;
         currentRound++;
         currentPartyNumber = generatePartyNumber();

@@ -157,15 +157,30 @@ function generateResult() {
     setTimeout(() => {
         resultBall.classList.remove('spinning');
 
-    // Shift previous results
-    for (let i = lastResults.length - 1; i > 0; i--) {
-        lastResults[i].className = lastResults[i-1].className;
-        lastResults[i].textContent = lastResults[i-1].textContent;
+    // Update main ball first
+    resultBall.textContent = number;
+    resultBall.className = 'result-ball';
+    if (number === 0 || number === 5) {
+        resultBall.classList.add('violet');
+    } else if ([2,4,6,8].includes(number)) {
+        resultBall.classList.add('green');
+    } else {
+        resultBall.classList.add('red');
     }
 
-    if (lastResults[0]) {
-        lastResults[0].className = resultBall.className + ' declared';
-        lastResults[0].textContent = resultBall.textContent;
+    // Shift previous results (from newest to oldest)
+    for (let i = 0; i < lastResults.length - 1; i++) {
+        lastResults[i].className = lastResults[i+1].className;
+        lastResults[i].textContent = lastResults[i+1].textContent;
+    }
+
+    // Add current result to history
+    if (lastResults[lastResults.length - 1]) {
+        lastResults[lastResults.length - 1].className = `result-ball small declared ${
+            number === 0 || number === 5 ? 'violet' : 
+            [2,4,6,8].includes(number) ? 'green' : 'red'
+        }`;
+        lastResults[lastResults.length - 1].textContent = number;
     }
 
     if (resultBall) {
@@ -197,8 +212,8 @@ function generateResult() {
 
 function updateGameHistory() {
     const historyList = document.querySelector('.game-history');
-    historyList.innerHTML = gameHistory.slice(0, 10).map(game => `
-        <div class="history-item">
+    historyList.innerHTML = gameHistory.slice(0, 10).map((game, index) => `
+        <div class="history-item ${index === 0 ? 'latest' : ''}">
             <span>Party: ${game.partyNumber}</span>
             <span class="result ${game.result === 0 || game.result === 5 ? 'violet' : 
                                [2,4,6,8].includes(game.result) ? 'green' : 'red'}">

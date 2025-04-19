@@ -139,11 +139,10 @@ function updateBettingHistory() {
     if (betList) {
         betList.innerHTML = bettingHistory.slice(0, 10).map(bet => {
             const partyShort = bet.partyNumber.slice(-6);
-            const typeShort = bet.type.length > 3 ? bet.type.slice(0, 3) : bet.type;
             return `
             <div class="history-item">
                 <span>#${partyShort}</span>
-                <span>${typeShort}</span>
+                <span>${bet.type}</span>
                 <span class="status ${bet.status.toLowerCase()}">
                     ${bet.status === 'win' ? `+${bet.winAmount}` : 
                       bet.status === 'loss' ? `-${bet.amount}` : 

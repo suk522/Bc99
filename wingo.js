@@ -88,16 +88,19 @@ function updateTimer() {
 
 function generateResult() {
     const number = Math.floor(Math.random() * 10);
-    const resultNumber = document.querySelector('.result-number');
-    resultNumber.textContent = number;
+    const resultBall = document.querySelector('.result-ball');
     
-    resultNumber.className = 'result-number';
-    if (number === 0 || number === 5) {
-        resultNumber.classList.add('violet');
-    } else if ([2,4,6,8].includes(number)) {
-        resultNumber.classList.add('green');
-    } else {
-        resultNumber.classList.add('red');
+    if (resultBall) {
+        resultBall.textContent = number;
+        resultBall.className = 'result-ball';
+        
+        if (number === 0 || number === 5) {
+            resultBall.classList.add('violet');
+        } else if ([2,4,6,8].includes(number)) {
+            resultBall.classList.add('green');
+        } else {
+            resultBall.classList.add('red');
+        }
     }
     
     updateGameResult(number);

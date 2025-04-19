@@ -98,7 +98,7 @@
 }
 
 .result-ball.declared {
-    transform: scale(0.4);
+    transform: scale(0.5);
     opacity: 0.8;
 }
 

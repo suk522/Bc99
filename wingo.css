@@ -1,4 +1,3 @@
-
 .wingo-container {
     max-width: 500px;
     margin: 0 auto;
@@ -89,8 +88,75 @@
 }
 
 .color-buttons {
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.color-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.2), rgba(0,0,0,0.4));
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.color-btn:active {
+    transform: scale(0.95);
+}
+
+.color-btn.green { 
+    background: linear-gradient(135deg, #388E3C, #4CAF50);
+}
+.color-btn.violet { 
+    background: linear-gradient(135deg, #6a1b9a, #9c27b0);
+}
+.color-btn.red { 
+    background: linear-gradient(135deg, #d32f2f, #f44336);
+}
+
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.number-btn {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.size-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.size-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6a1b9a, #9c27b0);
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.size-btn:active {
+    transform: scale(0.95);
 }
 
 .bet-prompt {
@@ -145,46 +211,6 @@
     border-radius: 5px;
 }
 
-.color-btn {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-}
-
-.color-btn.green { background: #4CAF50; }
-.color-btn.violet { background: #9C27B0; }
-.color-btn.red { background: #f44336; }
-
-.number-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-}
-
-.number-btn {
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-}
-
-.size-buttons {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
-.size-btn {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background: #FF9800;
-    color: white;
-    font-weight: bold;
-}
 
 .history-tabs {
     display: grid;

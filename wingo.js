@@ -159,10 +159,14 @@ function generateResult() {
     let isRotating = true;
     
     // Update rotation numbers
+    let rotationCount = 0;
     rotationInterval = setInterval(() => {
         if (isRotating) {
+            rotationCount++;
             const timeLeft = parseInt(document.querySelector('.timer span').textContent.split(':')[1]);
-            if (timeLeft <= 26) {
+            
+            // Show final number on last rotation
+            if (timeLeft <= 26 || rotationCount >= 8) {
                 resultBall.textContent = finalRotationNum;
                 isRotating = false;
                 clearInterval(rotationInterval);
@@ -178,13 +182,14 @@ function generateResult() {
                 }
             } else {
                 const randomNum = Math.floor(Math.random() * 10);
-                resultBall.textContent = randomNum;
+                resultBall.textContent = rotationCount === 7 ? finalRotationNum : randomNum;
                 resultBall.className = 'result-ball spinning';
                 
                 // Set color for current number
-                if (randomNum === 0 || randomNum === 5) {
+                const currentNum = rotationCount === 7 ? finalRotationNum : randomNum;
+                if (currentNum === 0 || currentNum === 5) {
                     resultBall.classList.add('violet');
-                } else if ([2,4,6,8].includes(randomNum)) {
+                } else if ([2,4,6,8].includes(currentNum)) {
                     resultBall.classList.add('green');
                 } else {
                     resultBall.classList.add('red');

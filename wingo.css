@@ -110,15 +110,15 @@
 }
 
 .result-ball.small {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     font-size: 12px;
-    transform: scale(0.33);
+    transform: scale(0.5);
     margin-top: 20px;
 }
 
 .last-results {
-    transform: scale(0.33);
+    transform: scale(0.5);
     transform-origin: right center;
     margin-right: 15px;
 }

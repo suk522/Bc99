@@ -24,11 +24,13 @@
 }
 
 .balance-info {
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, #6a1b9a, #9c27b0);
     border-radius: 10px;
     padding: 15px;
     margin: 20px 0;
     color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .balance-amount {

@@ -1,5 +1,3 @@
-
-let balance = 10000;
 let currentRound = 4;
 let timeLeft = 30;
 let timer;
@@ -21,13 +19,13 @@ function generatePartyNumber() {
 function addBet(type, amount) {
     const allButtons = document.querySelectorAll('.color-btn, .number-btn, .size-btn');
     let selectedButton = null;
-    
+
     allButtons.forEach(btn => {
         if (btn.classList.contains('selected')) {
             selectedButton = btn;
         }
     });
-    
+
     const betType = selectedButton ? selectedButton.textContent : type;
     bettingHistory.unshift({
         partyNumber: currentPartyNumber,
@@ -45,13 +43,13 @@ function updateGameResult(number) {
         result: number,
         timestamp: new Date().toISOString()
     });
-    
+
     // Update betting results
     bettingHistory.forEach(bet => {
         if (bet.status === 'pending') {
             let won = false;
             let multiplier = 2;
-            
+
             if (bet.type === 'violet' && (number === 0 || number === 5)) won = true;
             else if (bet.type === 'green' && [2,4,6,8].includes(number)) won = true;
             else if (bet.type === 'red' && [1,3,7,9].includes(number)) won = true;
@@ -59,7 +57,7 @@ function updateGameResult(number) {
                 won = true;
                 multiplier = 9;
             }
-            
+
             if (won) {
                 bet.status = 'win';
                 bet.winAmount = Math.floor(bet.amount * multiplier * 0.98); // 2% fee
@@ -70,33 +68,42 @@ function updateGameResult(number) {
             }
         }
     });
-    
+
     updateGameHistory();
     updateBettingHistory();
 }
 
 function updateBalance(amount) {
-    balance += amount;
-    const newBalance = `₹${balance}`;
-    document.querySelectorAll('.balance-amount').forEach(el => {
-        el.textContent = newBalance;
-    });
+    const currentBalance = getGlobalBalance();
+    const newBalance = currentBalance + amount;
+    updateGlobalBalance(newBalance);
 }
 
 function refreshBalance() {
-    const balanceElements = document.querySelectorAll('.balance-amount');
-    balanceElements.forEach(el => {
-        el.textContent = `₹${balance}`;
+    const currentBalance = getGlobalBalance();
+    updateGlobalBalance(currentBalance);
+}
+
+
+function getGlobalBalance() {
+    return parseFloat(localStorage.getItem('balance')) || 0;
+}
+
+function updateGlobalBalance(newBalance) {
+    localStorage.setItem('balance', newBalance);
+    const newBalanceStr = `₹${newBalance}`;
+    document.querySelectorAll('.balance-amount').forEach(el => {
+        el.textContent = newBalanceStr;
     });
 }
 
 function updateTimer() {
     const timerDisplay = document.querySelector('.timer span');
     const partyDisplay = document.querySelector('.round-number');
-    
+
     timerDisplay.textContent = `00:${timeLeft.toString().padStart(2, '0')}`;
     partyDisplay.textContent = currentPartyNumber;
-    
+
     if (timeLeft === 0) {
         generateResult();
         timeLeft = 30;
@@ -110,22 +117,22 @@ function generateResult() {
     const number = Math.floor(Math.random() * 10);
     const resultBall = document.querySelector('.result-ball:not(.small)');
     const lastResults = document.querySelectorAll('.result-ball.small');
-    
+
     // Shift previous results
     for (let i = lastResults.length - 1; i > 0; i--) {
         lastResults[i].className = lastResults[i-1].className;
         lastResults[i].textContent = lastResults[i-1].textContent;
     }
-    
+
     if (lastResults[0]) {
         lastResults[0].className = resultBall.className;
         lastResults[0].textContent = resultBall.textContent;
     }
-    
+
     if (resultBall) {
         resultBall.textContent = number;
         resultBall.className = 'result-ball';
-        
+
         // Example: if number is 2, ball will be green
         if (number === 0 || number === 5) {
             resultBall.classList.add('violet');
@@ -138,7 +145,7 @@ function generateResult() {
         resultBall.style.opacity = '1';
         resultBall.style.transform = 'scale(1)';
     }
-    
+
     updateGameResult(number);
     currentPartyNumber = generatePartyNumber();
 }
@@ -186,10 +193,11 @@ function hideBetPrompt() {
 
 document.addEventListener('DOMContentLoaded', () => {
     timer = setInterval(updateTimer, 1000);
-    
+    refreshBalance(); // Initialize balance
+
     const betPrompt = document.getElementById('betPrompt');
     const allBetButtons = document.querySelectorAll('.color-btn, .number-btn, .size-btn');
-    
+
     allBetButtons.forEach(btn => {
         btn.addEventListener('click', (e) => {
             allBetButtons.forEach(b => b.classList.remove('selected'));
@@ -197,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showBetPrompt();
         });
     });
-    
+
     allBetButtons.forEach(btn => {
         btn.addEventListener('click', showBetPrompt);
     });
@@ -222,8 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const customAmount = document.getElementById('customBet').value;
         const finalAmount = customAmount ? parseInt(customAmount) : selectedAmount;
         const totalBet = finalAmount * selectedMultiplier;
-        
-        if (totalBet && totalBet <= balance) {
+
+        if (totalBet && totalBet <= getGlobalBalance()) {
             const selectedButton = document.querySelector('.betting-options button.selected');
             const betType = selectedButton ? selectedButton.textContent : 'Unknown';
             addBet(betType, totalBet);

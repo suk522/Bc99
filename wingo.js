@@ -86,15 +86,26 @@ function refreshBalance() {
 
 
 function getGlobalBalance() {
-    return parseFloat(localStorage.getItem('balance')) || 0;
+    return parseFloat(localStorage.getItem('userBalance')) || 10000;
 }
 
 function updateGlobalBalance(newBalance) {
-    localStorage.setItem('balance', newBalance);
+    localStorage.setItem('userBalance', newBalance.toString());
     const newBalanceStr = `₹${newBalance}`;
-    document.querySelectorAll('.balance-amount').forEach(el => {
-        el.textContent = newBalanceStr;
-    });
+
+    // Update all balance displays if they exist
+    const balanceElements = document.querySelectorAll('.balance-amount');
+    if (balanceElements) {
+        balanceElements.forEach(el => {
+            if (el) el.textContent = newBalanceStr;
+        });
+    }
+
+    // Update specific balance display for wingo if it exists
+    const wingoBalance = document.getElementById('wingoBalance');
+    if (wingoBalance) {
+        wingoBalance.textContent = newBalanceStr;
+    }
 }
 
 function updateTimer() {

@@ -197,7 +197,6 @@ function generateResult() {
         }
 
         resultBall.style.opacity = '1';
-        resultBall.style.transform = 'scale(1)';
         
         // Add spinning class again after 5 seconds
         setTimeout(() => {

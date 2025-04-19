@@ -83,14 +83,14 @@
 }
 
 .result-ball {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 36px;
     border: 2px solid rgba(255,255,255,0.3);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     color: white;
@@ -110,9 +110,9 @@
 }
 
 .result-ball.small {
-    width: 30px;
-    height: 30px;
-    font-size: 16px;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
     margin-top: 10px;
     margin-right: 5px;
 }

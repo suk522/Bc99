@@ -156,26 +156,39 @@ function generateResult() {
     
     // Store the final rotation number
     let finalRotationNum = number;
+    let isRotating = true;
     
-    // Update rotation numbers, ensuring last one matches result
+    // Update rotation numbers
     rotationInterval = setInterval(() => {
-        if (resultBall.classList.contains('spinning')) {
+        if (isRotating) {
             const timeLeft = parseInt(document.querySelector('.timer span').textContent.split(':')[1]);
             if (timeLeft <= 26) {
                 resultBall.textContent = finalRotationNum;
+                isRotating = false;
                 clearInterval(rotationInterval);
+                
+                // Set final color
+                resultBall.className = 'result-ball';
+                if (finalRotationNum === 0 || finalRotationNum === 5) {
+                    resultBall.classList.add('violet');
+                } else if ([2,4,6,8].includes(finalRotationNum)) {
+                    resultBall.classList.add('green');
+                } else {
+                    resultBall.classList.add('red');
+                }
             } else {
                 const randomNum = Math.floor(Math.random() * 10);
                 resultBall.textContent = randomNum;
-            }
-            resultBall.className = 'result-ball spinning';
-            const currentNum = parseInt(resultBall.textContent);
-            if (currentNum === 0 || currentNum === 5) {
-                resultBall.classList.add('violet');
-            } else if ([2,4,6,8].includes(currentNum)) {
-                resultBall.classList.add('green');
-            } else {
-                resultBall.classList.add('red');
+                resultBall.className = 'result-ball spinning';
+                
+                // Set color for current number
+                if (randomNum === 0 || randomNum === 5) {
+                    resultBall.classList.add('violet');
+                } else if ([2,4,6,8].includes(randomNum)) {
+                    resultBall.classList.add('green');
+                } else {
+                    resultBall.classList.add('red');
+                }
             }
         }
     }, 500);

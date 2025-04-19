@@ -125,13 +125,16 @@
 
 @keyframes flip {
     0% { transform: rotateY(0deg); }
+    25% { transform: rotateY(90deg); }
     50% { transform: rotateY(180deg); }
+    75% { transform: rotateY(270deg); }
     100% { transform: rotateY(360deg); }
 }
 
 .result-ball.spinning {
-    animation: flip 1.5s linear infinite;
+    animation: flip 2s linear infinite;
     transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .result-ball.green {

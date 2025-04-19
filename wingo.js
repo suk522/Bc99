@@ -118,6 +118,21 @@ function updateTimer() {
 
     if (timeLeft === 25) {
         resultBall.classList.add('spinning');
+        // Change ball number during rotation
+        setInterval(() => {
+            if (resultBall.classList.contains('spinning')) {
+                const randomNum = Math.floor(Math.random() * 10);
+                resultBall.textContent = randomNum;
+                resultBall.className = 'result-ball spinning';
+                if (randomNum === 0 || randomNum === 5) {
+                    resultBall.classList.add('violet');
+                } else if ([2,4,6,8].includes(randomNum)) {
+                    resultBall.classList.add('green');
+                } else {
+                    resultBall.classList.add('red');
+                }
+            }
+        }, 500);
     }
 
     if (timeLeft === 0) {

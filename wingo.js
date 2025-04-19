@@ -62,13 +62,16 @@ function updateBalance(amount) {
 
 function updateTimer() {
     const timerDisplay = document.querySelector('.timer span');
+    const partyDisplay = document.querySelector('.round-number');
+    
     timerDisplay.textContent = `00:${timeLeft.toString().padStart(2, '0')}`;
+    partyDisplay.textContent = currentPartyNumber;
     
     if (timeLeft === 0) {
         generateResult();
         timeLeft = 30;
         currentRound++;
-        document.querySelector('.round-number').textContent = currentRound.toString().padStart(5, '0');
+        currentPartyNumber = generatePartyNumber();
     }
     timeLeft--;
 }
@@ -106,14 +109,16 @@ function updateGameHistory() {
 
 function updateBettingHistory() {
     const betList = document.querySelector('.betting-history');
-    betList.innerHTML = bettingHistory.slice(0, 10).map(bet => `
-        <div class="history-item">
-            <span>Party: ${bet.partyNumber}</span>
-            <span>Type: ${bet.type}</span>
-            <span>Amount: ₹${bet.amount}</span>
-            <span class="status ${bet.status}">${bet.status}</span>
-        </div>
-    `).join('');
+    if (betList) {
+        betList.innerHTML = bettingHistory.slice(0, 10).map(bet => `
+            <div class="history-item">
+                <span>${bet.partyNumber}</span>
+                <span>${bet.type}</span>
+                <span>₹${bet.amount}</span>
+                <span class="status ${bet.status.toLowerCase()}">${bet.status}</span>
+            </div>
+        `).join('');
+    }
 }
 
 function showBetPrompt() {
@@ -156,6 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const totalBet = finalAmount * selectedMultiplier;
         
         if (totalBet && totalBet <= balance) {
+            const selectedButton = document.querySelector('.betting-options button.selected');
+            const betType = selectedButton ? selectedButton.textContent : 'Unknown';
+            addBet(betType, totalBet);
             updateBalance(-totalBet);
             hideBetPrompt();
         } else {

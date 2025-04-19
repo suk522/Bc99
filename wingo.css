@@ -284,9 +284,10 @@
 .history-item {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 8px;
     border-bottom: 1px solid rgba(255,255,255,0.1);
     color: white;
+    font-size: 0.9rem;
 }
 
 .status {

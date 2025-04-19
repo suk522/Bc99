@@ -137,18 +137,21 @@ function updateGameHistory() {
 function updateBettingHistory() {
     const betList = document.querySelector('.betting-history');
     if (betList) {
-        betList.innerHTML = bettingHistory.slice(0, 10).map(bet => `
+        betList.innerHTML = bettingHistory.slice(0, 10).map(bet => {
+            const partyShort = bet.partyNumber.slice(-6);
+            const typeShort = bet.type.length > 3 ? bet.type.slice(0, 3) : bet.type;
+            return `
             <div class="history-item">
-                <span>${bet.partyNumber}</span>
-                <span>₹${bet.amount}</span>
-                <span>${bet.type}</span>
+                <span>#${partyShort}</span>
+                <span>${typeShort}</span>
                 <span class="status ${bet.status.toLowerCase()}">
-                    ${bet.status === 'win' ? `+₹${bet.winAmount}` : 
-                      bet.status === 'loss' ? '-₹${bet.amount}' : 
-                      'Pending'}
+                    ${bet.status === 'win' ? `+${bet.winAmount}` : 
+                      bet.status === 'loss' ? `-${bet.amount}` : 
+                      '⌛'}
                 </span>
             </div>
-        `).join('');
+            `;
+        }).join('');
     }
 }
 

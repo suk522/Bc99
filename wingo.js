@@ -57,7 +57,17 @@ function updateGameResult(number) {
 
 function updateBalance(amount) {
     balance += amount;
-    document.querySelector('.balance-amount').textContent = `₹${balance}`;
+    const newBalance = `₹${balance}`;
+    document.querySelectorAll('.balance-amount').forEach(el => {
+        el.textContent = newBalance;
+    });
+}
+
+function refreshBalance() {
+    const balanceElements = document.querySelectorAll('.balance-amount');
+    balanceElements.forEach(el => {
+        el.textContent = `₹${balance}`;
+    });
 }
 
 function updateTimer() {

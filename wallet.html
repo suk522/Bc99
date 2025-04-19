@@ -13,17 +13,11 @@
         <section class="balance-card">
             <div class="balance-header">
                 <h2>Balance</h2>
-                <button class="refresh-btn">
+                <button class="refresh-btn" onclick="refreshBalance()">
                     <span>↻</span>
                 </button>
             </div>
-            <div class="balance-amount">$1,000.00</div>
-            <div class="bank-status" id="bankStatus">No bank account linked</div>
-            <div class="action-buttons">
-                <button class="withdraw-btn">Withdraw</button>
-                <button class="deposit-btn">Deposit</button>
-                <button class="bind-bank-btn" onclick="bindBank()">Bind Bank</button>
-            </div>
+            <div class="balance-amount" id="mainBalance">₹10,000</div>
         </section>
 
         <section class="history-section">

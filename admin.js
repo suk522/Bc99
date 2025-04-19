@@ -1,7 +1,18 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Check authentication
+    if (!localStorage.getItem('adminAuth')) {
+        window.location.href = 'admin-login.html';
+        return;
+    }
     loadMockData();
 });
+
+// Add logout function
+function logout() {
+    localStorage.removeItem('adminAuth');
+    window.location.href = 'admin-login.html';
+}
 
 function showTab(tabName) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));

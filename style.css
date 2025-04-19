@@ -96,14 +96,14 @@ body {
 }
 
 .aviator {
-    background-image: url('attached_assets/file_00000000bd206230906de740acf69f21_conversation_id=6803afa6-1f54-800b-bfb2-dd9cba574747&message_id=685026e3-0781-4a45-905c-5f64eb071c4e.png');
+    background-image: url('attached_assets/IMG_20250419_200339.png');
     background-size: cover;
     background-position: center;
 }
 
 .slots {
-    background-image: url('attached_assets/file_00000000bd206230906de740acf69f21_conversation_id=6803afa6-1f54-800b-bfb2-dd9cba574747&message_id=685026e3-0781-4a45-905c-5f64eb071c4e.png');
-    background-position: bottom;
+    background-image: url('attached_assets/IMG_20250419_200358.png');
+    background-position: center;
     background-size: cover;
 }
 

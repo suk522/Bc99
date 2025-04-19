@@ -299,10 +299,17 @@
 
 .status.win {
     color: #4CAF50;
+    font-weight: bold;
 }
 
 .status.loss {
     color: #f44336;
+    font-weight: bold;
+}
+
+.status.pending {
+    color: #ffd700;
+    font-weight: bold;
 }
 
 .result {

@@ -24,7 +24,7 @@ function addBet(type, amount) {
         type: type,
         amount: amount,
         status: 'pending',
-        timestamp: new Date().toISOString()
+        winAmount: 0
     });
     updateBettingHistory();
 }
@@ -39,15 +39,25 @@ function updateGameResult(number) {
     // Update betting results
     bettingHistory.forEach(bet => {
         if (bet.status === 'pending') {
-            // Determine win/loss based on bet type and result
             let won = false;
+            let multiplier = 2;
+            
             if (bet.type === 'violet' && (number === 0 || number === 5)) won = true;
             else if (bet.type === 'green' && [2,4,6,8].includes(number)) won = true;
             else if (bet.type === 'red' && [1,3,7,9].includes(number)) won = true;
-            else if (bet.type === number) won = true;
+            else if (bet.type === number) {
+                won = true;
+                multiplier = 9;
+            }
             
-            bet.status = won ? 'win' : 'loss';
-            updateBalance(won ? bet.amount * 2 : -bet.amount);
+            if (won) {
+                bet.status = 'win';
+                bet.winAmount = Math.floor(bet.amount * multiplier * 0.98); // 2% fee
+                updateBalance(bet.winAmount);
+            } else {
+                bet.status = 'loss';
+                bet.winAmount = -bet.amount;
+            }
         }
     });
     
@@ -130,9 +140,13 @@ function updateBettingHistory() {
         betList.innerHTML = bettingHistory.slice(0, 10).map(bet => `
             <div class="history-item">
                 <span>${bet.partyNumber}</span>
-                <span>${bet.type}</span>
                 <span>₹${bet.amount}</span>
-                <span class="status ${bet.status.toLowerCase()}">${bet.status}</span>
+                <span>${bet.type}</span>
+                <span class="status ${bet.status.toLowerCase()}">
+                    ${bet.status === 'win' ? `+₹${bet.winAmount}` : 
+                      bet.status === 'loss' ? '-₹${bet.amount}' : 
+                      'Pending'}
+                </span>
             </div>
         `).join('');
     }

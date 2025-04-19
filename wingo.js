@@ -149,9 +149,36 @@ function generateResult() {
     const number = Math.floor(Math.random() * 10);
     const resultBall = document.querySelector('.result-ball:not(.small)');
     const lastResults = document.querySelectorAll('.result-ball.small');
+    let rotationInterval;
     
     // Start spinning before showing result
     resultBall.classList.add('spinning');
+    
+    // Store the final rotation number
+    let finalRotationNum = number;
+    
+    // Update rotation numbers, ensuring last one matches result
+    rotationInterval = setInterval(() => {
+        if (resultBall.classList.contains('spinning')) {
+            const timeLeft = parseInt(document.querySelector('.timer span').textContent.split(':')[1]);
+            if (timeLeft <= 26) {
+                resultBall.textContent = finalRotationNum;
+                clearInterval(rotationInterval);
+            } else {
+                const randomNum = Math.floor(Math.random() * 10);
+                resultBall.textContent = randomNum;
+            }
+            resultBall.className = 'result-ball spinning';
+            const currentNum = parseInt(resultBall.textContent);
+            if (currentNum === 0 || currentNum === 5) {
+                resultBall.classList.add('violet');
+            } else if ([2,4,6,8].includes(currentNum)) {
+                resultBall.classList.add('green');
+            } else {
+                resultBall.classList.add('red');
+            }
+        }
+    }, 500);
     
     // Show result after 5 seconds
     setTimeout(() => {

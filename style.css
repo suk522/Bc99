@@ -125,3 +125,90 @@ body {
 main {
     margin-bottom: 70px;
 }
+
+/* Wallet Page Styles */
+.wallet-page {
+    padding: 1rem;
+}
+
+.balance-card {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.balance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.refresh-btn {
+    background: none;
+    border: none;
+    color: var(--light);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.balance-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.withdraw-btn, .deposit-btn {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.withdraw-btn {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.deposit-btn {
+    background-color: var(--light);
+    color: var(--primary);
+}
+
+.history-section {
+    background: var(--dark);
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.history-list {
+    margin-top: 1rem;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.history-item.deposit .amount {
+    color: #4CAF50;
+}
+
+.history-item.withdraw .amount {
+    color: #f44336;
+}
+
+.date {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.9rem;
+}

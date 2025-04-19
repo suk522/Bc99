@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BC99 - Wallet</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <main class="wallet-page">
+        <section class="balance-card">
+            <div class="balance-header">
+                <h2>Balance</h2>
+                <button class="refresh-btn">
+                    <span>↻</span>
+                </button>
+            </div>
+            <div class="balance-amount">$1,000.00</div>
+            <div class="action-buttons">
+                <button class="withdraw-btn">Withdraw</button>
+                <button class="deposit-btn">Deposit</button>
+            </div>
+        </section>
+
+        <section class="history-section">
+            <div class="history-tab">
+                <h3>Transaction History</h3>
+                <div class="history-list">
+                    <div class="history-item deposit">
+                        <span class="transaction-type">Deposit</span>
+                        <span class="amount">+$500.00</span>
+                        <span class="date">2024-04-19</span>
+                    </div>
+                    <div class="history-item withdraw">
+                        <span class="transaction-type">Withdraw</span>
+                        <span class="amount">-$200.00</span>
+                        <span class="date">2024-04-18</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">Activity</a>
+            <a href="wallet.html" class="active">Wallet</a>
+            <a href="#">Account</a>
+        </div>
+    </nav>
+</body>
+</html>

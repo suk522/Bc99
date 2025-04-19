@@ -143,7 +143,7 @@ function generateResult() {
     }
 
     if (lastResults[0]) {
-        lastResults[0].className = resultBall.className;
+        lastResults[0].className = resultBall.className + ' declared';
         lastResults[0].textContent = resultBall.textContent;
     }
 

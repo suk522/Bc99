@@ -81,6 +81,19 @@
     color: white;
 }
 
+.last-results {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.result-ball.small {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+}
+
 .result-ball.green {
     background: linear-gradient(135deg, #388E3C, #4CAF50);
 }

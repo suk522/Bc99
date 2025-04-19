@@ -108,7 +108,19 @@ function updateTimer() {
 
 function generateResult() {
     const number = Math.floor(Math.random() * 10);
-    const resultBall = document.querySelector('.result-ball');
+    const resultBall = document.querySelector('.result-ball:not(.small)');
+    const lastResults = document.querySelectorAll('.result-ball.small');
+    
+    // Shift previous results
+    for (let i = lastResults.length - 1; i > 0; i--) {
+        lastResults[i].className = lastResults[i-1].className;
+        lastResults[i].textContent = lastResults[i-1].textContent;
+    }
+    
+    if (lastResults[0]) {
+        lastResults[0].className = resultBall.className;
+        lastResults[0].textContent = resultBall.textContent;
+    }
     
     if (resultBall) {
         resultBall.textContent = number;

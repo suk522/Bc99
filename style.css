@@ -184,8 +184,77 @@ main {
 }
 
 .bind-bank-btn {
-    background-color: #4a148c;
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: var(--dark);
     color: var(--light);
+}
+
+.bind-bank-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.custom-prompt {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--dark);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid var(--primary);
+    width: 90%;
+    max-width: 300px;
+    z-index: 1000;
+}
+
+.custom-prompt input {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+    border: 1px solid var(--primary);
+    border-radius: 5px;
+    background: #2a2a2a;
+    color: var(--light);
+}
+
+.prompt-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.prompt-buttons button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.prompt-buttons .confirm {
+    background: var(--primary);
+    color: var(--light);
+}
+
+.prompt-buttons .cancel {
+    background: #444;
+    color: var(--light);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 999;
 }
 
 .bank-status {

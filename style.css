@@ -1,4 +1,3 @@
-
 :root {
     --primary: #6a1b9a;
     --secondary: #9c27b0;
@@ -62,18 +61,18 @@ body {
 }
 
 .games {
-    padding: 2rem;
+    padding: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    max-width: 800px;
     margin: 0 auto;
 }
 
 .game-card {
     background: var(--primary);
-    border-radius: 10px;
-    padding: 1.5rem;
+    border-radius: 8px;
+    padding: 1rem;
     text-align: center;
     transition: transform 0.3s;
 }
@@ -83,15 +82,17 @@ body {
 }
 
 .game-image {
-    height: 200px;
-    margin: 1rem 0;
+    height: 150px;
+    margin: 0.5rem 0;
     border-radius: 5px;
     background-size: cover;
     background-position: center;
 }
 
 .wingo {
-    background-image: linear-gradient(45deg, var(--secondary), var(--primary));
+    background-image: url('attached_assets/file_0000000099786230900cc20d4dd5a33c_conversation_id=6803afa6-1f54-800b-bfb2-dd9cba574747&message_id=d55776db-b198-4a19-af6e-49453d100d2d.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .aviator {

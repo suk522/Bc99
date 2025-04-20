@@ -59,7 +59,63 @@ function showBettingHistory() {
 }
 
 function showRedEnvelopeForm() {
-    document.getElementById('redEnvelopeModal').style.display = 'block';
+    const overlay = document.createElement('div');
+    overlay.className = 'overlay';
+
+    const prompt = document.createElement('div');
+    prompt.className = 'custom-prompt';
+
+    prompt.innerHTML = `
+        <h3>Redeem Red Envelope</h3>
+        <input type="text" id="redEnvelopeCode" placeholder="Enter code" />
+        <div class="prompt-buttons">
+            <button class="cancel">Close</button>
+            <button class="confirm">Redeem</button>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    document.body.appendChild(prompt);
+
+    const input = prompt.querySelector('input');
+    const confirmBtn = prompt.querySelector('.confirm');
+    const cancelBtn = prompt.querySelector('.cancel');
+
+    function cleanup() {
+        document.body.removeChild(overlay);
+        document.body.removeChild(prompt);
+    }
+
+    confirmBtn.onclick = () => {
+        const code = input.value.trim();
+        if (code) {
+            redeemRedEnvelopeCode(code);
+            cleanup();
+        }
+    };
+
+    cancelBtn.onclick = cleanup;
+}
+
+function redeemRedEnvelopeCode(code) {
+    const redEnvelopes = JSON.parse(localStorage.getItem('redEnvelopes') || '[]');
+    const envelope = redEnvelopes.find(e => e.code === code && !e.redeemed);
+
+    if (envelope) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        currentUser.balance = (parseFloat(currentUser.balance) + envelope.amount).toString();
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        envelope.redeemed = true;
+        envelope.redeemedBy = currentUser.uid;
+        envelope.redeemedAt = new Date().toISOString();
+        localStorage.setItem('redEnvelopes', JSON.stringify(redEnvelopes));
+
+        document.getElementById('userBalance').textContent = `₹${currentUser.balance}`;
+        alert(`Successfully redeemed ₹${envelope.amount}!`);
+    } else {
+        alert('Invalid or already redeemed code');
+    }
 }
 
 function closeRedEnvelopeModal() {

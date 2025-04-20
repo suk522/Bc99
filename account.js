@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    // Initialize all modals
+    initializeModals();
+
     // Update user information
     document.getElementById('userName').textContent = currentUser.name || 'User';
     document.getElementById('userUID').textContent = currentUser.uid || 'N/A';
@@ -83,4 +86,66 @@ function redeemRedEnvelopeCode() {
     } else {
         alert('Invalid or already redeemed code');
     }
+}
+
+function initializeModals() {
+    const modals = document.querySelectorAll('.modal');
+    const closeBtns = document.querySelectorAll('.close-btn');
+
+    closeBtns.forEach(btn => {
+        btn.onclick = () => {
+            btn.closest('.modal').style.display = 'none';
+        };
+    });
+
+    window.onclick = (event) => {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
+    };
+}
+
+function showBindBank() {
+    document.getElementById('bindBankModal').style.display = 'block';
+}
+
+function closeBankModal() {
+    document.getElementById('bindBankModal').style.display = 'none';
+}
+
+function bindBankAccount() {
+    const bankName = document.getElementById('bankName').value;
+    const accountNumber = document.getElementById('accountNumber').value;
+    const ifscCode = document.getElementById('ifscCode').value;
+
+    if (!bankName || !accountNumber || !ifscCode) {
+        alert('Please fill all fields');
+        return;
+    }
+
+    // Save bank details
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    currentUser.bankDetails = { bankName, accountNumber, ifscCode };
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+    alert('Bank account bound successfully');
+    closeBankModal();
+}
+
+function showCustomerSupport() {
+    document.getElementById('supportModal').style.display = 'block';
+}
+
+function closeSupportModal() {
+    document.getElementById('supportModal').style.display = 'none';
+}
+
+function contactSupport(type) {
+    if (type === 'chat') {
+        // Implement live chat functionality
+        alert('Live chat support will be available soon');
+    } else if (type === 'email') {
+        window.location.href = 'mailto:support@bc99.com';
+    }
+    closeSupportModal();
 }

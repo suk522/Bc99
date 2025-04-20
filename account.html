@@ -20,31 +20,74 @@
             </div>
             
             <div class="account-sections">
-                <button class="account-btn" onclick="showBettingHistory()">Betting History</button>
-                <a href="https://t.me/hayat00444" target="_blank" class="account-btn">Contact Support on Telegram</a>
-                <button class="account-btn">Privacy Policy</button>
-                <button class="account-btn" onclick="showBindBank()">Bind Bank Account</button>
-                <button class="account-btn" onclick="showRedEnvelopeForm()">Redeem Red Envelope</button>
-                <button class="logout-btn">Logout</button>
+                <button class="account-btn premium-btn" onclick="showBettingHistory()">
+                    <span class="btn-icon">📊</span>
+                    Betting History
+                </button>
+                <button class="account-btn premium-btn">
+                    <span class="btn-icon">📜</span>
+                    Privacy Policy
+                </button>
+                <button class="account-btn premium-btn" onclick="showBindBank()">
+                    <span class="btn-icon">🏦</span>
+                    Bind Bank Account
+                </button>
+                <button class="account-btn premium-btn" onclick="showRedEnvelopeForm()">
+                    <span class="btn-icon">🧧</span>
+                    Redeem Red Envelope
+                </button>
+                <button class="account-btn premium-btn" onclick="showCustomerSupport()">
+                    <span class="btn-icon">💬</span>
+                    Contact Support
+                </button>
             </div>
+
+            <button class="logout-btn">
+                <span class="btn-icon">🚪</span>
+                Logout
+            </button>
 
             <!-- Red Envelope Modal -->
             <div id="redEnvelopeModal" class="modal">
-                <div class="modal-content">
+                <div class="modal-content premium-modal">
                     <span class="close-btn" onclick="closeRedEnvelopeModal()">&times;</span>
                     <h3>Redeem Red Envelope Code</h3>
                     <input type="text" id="redEnvelopeCode" placeholder="Enter code">
-                    <button onclick="redeemRedEnvelopeCode()">Redeem</button>
+                    <button class="confirm-btn" onclick="redeemRedEnvelopeCode()">Redeem</button>
                 </div>
             </div>
-        </div>
 
-        <!-- Betting History Modal -->
-        <div id="bettingHistoryModal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <h3>Betting History</h3>
-                <div id="bettingHistoryList"></div>
+            <!-- Bank Bind Modal -->
+            <div id="bindBankModal" class="modal">
+                <div class="modal-content premium-modal">
+                    <span class="close-btn" onclick="closeBankModal()">&times;</span>
+                    <h3>Bind Bank Account</h3>
+                    <input type="text" id="bankName" placeholder="Bank Name">
+                    <input type="text" id="accountNumber" placeholder="Account Number">
+                    <input type="text" id="ifscCode" placeholder="IFSC Code">
+                    <button class="confirm-btn" onclick="bindBankAccount()">Bind Account</button>
+                </div>
+            </div>
+
+            <!-- Support Modal -->
+            <div id="supportModal" class="modal">
+                <div class="modal-content premium-modal">
+                    <span class="close-btn" onclick="closeSupportModal()">&times;</span>
+                    <h3>Customer Support</h3>
+                    <div class="support-options">
+                        <button class="support-btn" onclick="contactSupport('chat')">Live Chat</button>
+                        <button class="support-btn" onclick="contactSupport('email')">Email Support</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Betting History Modal -->
+            <div id="bettingHistoryModal" class="modal">
+                <div class="modal-content premium-modal">
+                    <span class="close-btn">&times;</span>
+                    <h3>Betting History</h3>
+                    <div id="bettingHistoryList"></div>
+                </div>
             </div>
         </div>
     </main>

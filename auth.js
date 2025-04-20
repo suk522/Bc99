@@ -59,8 +59,13 @@ function handleRegistration(event) {
 
 function checkAuth() {
     const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser && !window.location.pathname.includes('login.html') && !window.location.pathname.includes('register.html')) {
+    const isAuthPage = window.location.pathname.includes('login.html') || 
+                      window.location.pathname.includes('register.html');
+    
+    if (!currentUser && !isAuthPage) {
         window.location.href = 'login.html';
+    } else if (currentUser && isAuthPage) {
+        window.location.href = 'index.html';
     }
 }
 

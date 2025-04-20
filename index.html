@@ -45,7 +45,9 @@
             <a href="admin-login.html">Admin</a>
         </div>
     </nav>
-<script>
+<script src="auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', checkAuth);
         document.addEventListener('click', e => {
             const link = e.target.closest('a');
             if (link && link.href && !link.target && !e.ctrlKey && !e.shiftKey) {

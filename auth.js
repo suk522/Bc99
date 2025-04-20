@@ -4,13 +4,13 @@ function handleUserLogin(event) {
     const phone = document.getElementById('userLoginPhone').value;
     const password = document.getElementById('userLoginPassword').value;
     
-    // In a real app, this would validate against a database
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const user = users.find(u => u.phone === phone && u.password === password);
     
     if (user) {
         localStorage.setItem('currentUser', JSON.stringify(user));
-        window.location.href = 'index.html';
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = 'account.html';
     } else {
         alert('Invalid credentials');
     }

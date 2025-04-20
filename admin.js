@@ -61,7 +61,8 @@ function displayRedEnvelopes() {
                     <th>Amount</th>
                     <th>Status</th>
                     <th>Created</th>
-                    <th>Redeemed By</th>
+                    <th>Times Redeemed</th>
+                    <th>Last Redeemed</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,9 +70,10 @@ function displayRedEnvelopes() {
                     <tr>
                         <td>${envelope.code}</td>
                         <td>₹${envelope.amount}</td>
-                        <td>${envelope.redeemed ? 'Redeemed' : 'Active'}</td>
+                        <td>${envelope.isActive ? 'Active' : 'Expired'}</td>
                         <td>${new Date(envelope.createdAt).toLocaleString()}</td>
-                        <td>${envelope.redeemedBy || '-'}</td>
+                        <td>${envelope.redeemedBy ? envelope.redeemedBy.length : 0}</td>
+                        <td>${envelope.lastRedeemedAt ? new Date(envelope.lastRedeemedAt).toLocaleString() : '-'}</td>
                     </tr>
                 `).join('')}
             </tbody>

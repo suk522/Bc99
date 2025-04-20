@@ -1,8 +1,13 @@
-
-function handleUserLogin(event) {
+// User authentication functions
+function handleLogin(event) {
     event.preventDefault();
-    const phone = document.getElementById('userLoginPhone').value;
-    const password = document.getElementById('userLoginPassword').value;
+    const phone = document.getElementById('loginPhone')?.value;
+    const password = document.getElementById('loginPassword')?.value;
+
+    if (!phone || !password) {
+        alert('Please enter both phone and password');
+        return false;
+    }
 
     const users = JSON.parse(localStorage.getItem('users') || '[]');
     const user = users.find(u => u.phone === phone && u.password === password);
@@ -12,20 +17,21 @@ function handleUserLogin(event) {
         localStorage.setItem('isLoggedIn', 'true');
         window.location.href = 'index.html';
     } else {
-        alert('Invalid phone number or password');
+        alert('Invalid credentials');
     }
     return false;
 }
 
-function generateUID() {
-    return Math.floor(10000 + Math.random() * 90000).toString();
-}
-
 function handleRegistration(event) {
     event.preventDefault();
-    const name = document.getElementById('registerName').value;
-    const phone = document.getElementById('registerPhone').value;
-    const password = document.getElementById('registerPassword').value;
+    const name = document.getElementById('registerName')?.value;
+    const phone = document.getElementById('registerPhone')?.value;
+    const password = document.getElementById('registerPassword')?.value;
+
+    if (!name || !phone || !password) {
+        alert('Please fill all fields');
+        return false;
+    }
 
     const users = JSON.parse(localStorage.getItem('users') || '[]');
 
@@ -34,19 +40,13 @@ function handleRegistration(event) {
         return false;
     }
 
-    let uid;
-    do {
-        uid = generateUID();
-    } while (users.some(u => u.uid === uid));
-
-    const newUser = { 
-        uid,
-        name, 
-        phone, 
-        password, 
-        balance: 10000,
-        status: 'active',
-        registeredAt: new Date().toISOString()
+    const newUser = {
+        uid: Date.now().toString(),
+        name,
+        phone,
+        password,
+        balance: '0',
+        bonusReceived: false
     };
 
     users.push(newUser);
@@ -58,24 +58,16 @@ function handleRegistration(event) {
     return false;
 }
 
+// Check authentication status
 function checkAuth() {
-    const currentUser = localStorage.getItem('currentUser');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    const isLoginPage = window.location.pathname.endsWith('login.html');
-    const isRegisterPage = window.location.pathname.endsWith('register.html');
-    const isAuthPage = isLoginPage || isRegisterPage;
 
     if (!currentUser || !isLoggedIn) {
-        if (!isAuthPage) {
-            window.location.href = 'login.html';
-        }
-    } else if (isAuthPage) {
-        window.location.href = 'index.html';
+        window.location.href = 'login.html';
+        return false;
     }
-
-    if (!isAuthPage) {
-        document.getElementById('mainContent').style.display = 'block';
-    }
+    return true;
 }
 
 // Initialize auth check

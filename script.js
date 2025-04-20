@@ -100,3 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Cache current page to prevent unnecessary refreshes
+let currentPage = window.location.pathname;
+
+document.addEventListener('click', e => {
+    const link = e.target.closest('a');
+    if (link && link.href && !link.target && !e.ctrlKey && !e.shiftKey) {
+        e.preventDefault();
+        const newPage = new URL(link.href).pathname;
+
+        if (newPage !== currentPage) {
+            document.body.classList.add('page-transition');
+            setTimeout(() => {
+                currentPage = newPage;
+                window.location = link.href;
+            }, 200);
+        }
+    }
+});

@@ -68,6 +68,18 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize paint performance */
+.nav-links a,
+.game-card,
+.account-btn,
+button {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 body {

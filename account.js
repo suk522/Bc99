@@ -1,11 +1,20 @@
+// Cache DOM elements
+let modals = {};
+let currentUser = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const isLoggedIn = localStorage.getItem('isLoggedIn');
 
-    if (!currentUser || !isLoggedIn) {
+    if (!currentUser?.uid || !isLoggedIn) {
         window.location.href = 'login.html';
         return;
     }
+
+    // Cache modal elements
+    ['bettingHistoryModal', 'redEnvelopeModal', 'bindBankModal', 'supportModal'].forEach(id => {
+        modals[id] = document.getElementById(id);
+    });
 
     // Initialize all modals
     initializeModals();

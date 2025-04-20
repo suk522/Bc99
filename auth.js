@@ -1,4 +1,3 @@
-
 function handleUserLogin(event) {
     event.preventDefault();
     const phone = document.getElementById('userLoginPhone').value;
@@ -58,9 +57,14 @@ function handleRegistration(event) {
     return false;
 }
 
+// Auth state management
+let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
 function checkAuth() {
-    const currentUser = localStorage.getItem('currentUser');
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
     const isLoginPage = window.location.pathname.endsWith('login.html');
     const isRegisterPage = window.location.pathname.endsWith('register.html');
     const isAuthPage = isLoginPage || isRegisterPage;
@@ -81,7 +85,7 @@ function checkAuth() {
     }
 }
 
-// Initialize auth check
+// Initialize auth check on page load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', checkAuth);
 } else {

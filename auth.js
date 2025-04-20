@@ -61,13 +61,21 @@ function checkAuth() {
     const currentUser = localStorage.getItem('currentUser');
     const isAuthPage = window.location.pathname.includes('login.html') || 
                       window.location.pathname.includes('register.html');
+    const isIndexPage = window.location.pathname === '/' || 
+                       window.location.pathname === '/index.html';
     
     if (!currentUser && !isAuthPage) {
         window.location.href = 'login.html';
+        return false;
     } else if (currentUser && isAuthPage) {
         window.location.href = 'index.html';
+        return false;
     }
+    return true;
 }
+
+// Check auth on page load
+document.addEventListener('DOMContentLoaded', checkAuth);
 
 // Check auth on page load
 document.addEventListener('DOMContentLoaded', checkAuth);

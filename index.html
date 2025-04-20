@@ -8,8 +8,8 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    
-    <main>
+    <script src="auth.js"></script>
+    <main id="mainContent" style="display: none;">
         <section class="hero">
             <h1>Welcome to BC99</h1>
             <p>Experience the thrill of our premium games</p>
@@ -35,6 +35,12 @@
             </div>
         </section>
     </main>
+
+    <script>
+        if (localStorage.getItem('currentUser')) {
+            document.getElementById('mainContent').style.display = 'block';
+        }
+    </script>
 
     <nav class="navbar">
         <div class="nav-links">

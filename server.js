@@ -1,7 +1,11 @@
 
 const express = require('express');
+const connectDB = require('./db');
 const app = express();
 const port = 5000;
+
+// Connect to MongoDB
+connectDB();
 
 app.use(express.static('./'));
 

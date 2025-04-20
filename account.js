@@ -134,23 +134,28 @@ function closeRedEnvelopeModal() {
 function redeemRedEnvelopeCode() {
     const code = document.getElementById('redEnvelopeCode').value;
     const redEnvelopes = JSON.parse(localStorage.getItem('redEnvelopes') || '[]');
-    const envelope = redEnvelopes.find(e => e.code === code && !e.redeemed);
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const envelope = redEnvelopes.find(e => e.code === code && e.isActive);
 
-    if (envelope) {
-        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        currentUser.balance = (parseFloat(currentUser.balance) + envelope.amount).toString();
-        localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-        envelope.redeemed = true;
-        envelope.redeemedBy = currentUser.uid;
-        envelope.redeemedAt = new Date().toISOString();
-        localStorage.setItem('redEnvelopes', JSON.stringify(redEnvelopes));
-
-        alert(`Successfully redeemed ₹${envelope.amount}!`);
-        closeRedEnvelopeModal();
-    } else {
-        alert('Invalid or already redeemed code');
+    if (!envelope) {
+        alert('Invalid code or code has expired');
+        return;
     }
+
+    if (envelope.redeemedBy.includes(currentUser.uid)) {
+        alert('You have already redeemed this code');
+        return;
+    }
+
+    currentUser.balance = (parseFloat(currentUser.balance) + envelope.amount).toString();
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+    envelope.redeemedBy.push(currentUser.uid);
+    envelope.lastRedeemedAt = new Date().toISOString();
+    localStorage.setItem('redEnvelopes', JSON.stringify(redEnvelopes));
+
+    alert(`Successfully redeemed ₹${envelope.amount}!`);
+    closeRedEnvelopeModal();
 }
 
 function initializeModals() {

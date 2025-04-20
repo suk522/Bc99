@@ -33,10 +33,14 @@ function loadMockData() {
         { id: 2, user: "User123", amount: "$250", status: "Completed", date: "2024-04-17" }
     ];
     
-    const users = [
-        { id: 1, username: "User123", balance: "$1500", status: "Active" },
-        { id: 2, username: "User456", balance: "$2000", status: "Active" }
-    ];
+    const users = JSON.parse(localStorage.getItem('users') || '[]').map(user => ({
+        id: user.uid,
+        username: user.name,
+        phone: user.phone,
+        balance: `₹${user.balance}`,
+        status: user.status,
+        registeredAt: new Date(user.registeredAt).toLocaleDateString()
+    }));
 
     renderTable('withdrawalsTable', withdrawals);
     renderTable('depositsTable', deposits);

@@ -17,6 +17,10 @@ function handleUserLogin(event) {
     return false;
 }
 
+function generateUID() {
+    return Math.floor(10000 + Math.random() * 90000).toString();
+}
+
 function handleRegistration(event) {
     event.preventDefault();
     const name = document.getElementById('registerName').value;
@@ -30,7 +34,21 @@ function handleRegistration(event) {
         return false;
     }
     
-    const newUser = { name, phone, password, balance: 10000 };
+    let uid;
+    do {
+        uid = generateUID();
+    } while (users.some(u => u.uid === uid));
+    
+    const newUser = { 
+        uid,
+        name, 
+        phone, 
+        password, 
+        balance: 10000,
+        status: 'active',
+        registeredAt: new Date().toISOString()
+    };
+    
     users.push(newUser);
     localStorage.setItem('users', JSON.stringify(users));
     localStorage.setItem('currentUser', JSON.stringify(newUser));

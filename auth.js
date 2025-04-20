@@ -1,3 +1,4 @@
+
 function handleUserLogin(event) {
     event.preventDefault();
     const phone = document.getElementById('userLoginPhone').value;
@@ -60,18 +61,22 @@ function handleRegistration(event) {
 function checkAuth() {
     const currentUser = localStorage.getItem('currentUser');
     const isLoggedIn = localStorage.getItem('isLoggedIn');
-    const isAuthPage = window.location.pathname.includes('login.html') || 
-                      window.location.pathname.includes('register.html');
+    const isLoginPage = window.location.pathname.endsWith('login.html');
+    const isRegisterPage = window.location.pathname.endsWith('register.html');
+    const isAuthPage = isLoginPage || isRegisterPage;
 
-    if (!currentUser && !isLoggedIn && !isAuthPage) {
-        window.location.href = 'login.html';
-        return false;
-    } else if (currentUser && isLoggedIn && isAuthPage) {
+    if (!currentUser || !isLoggedIn) {
+        if (!isAuthPage) {
+            window.location.href = 'login.html';
+        }
+    } else if (isAuthPage) {
         window.location.href = 'index.html';
-        return false;
     }
-    return true;
+
+    if (!isAuthPage) {
+        document.getElementById('mainContent').style.display = 'block';
+    }
 }
 
-// Check auth on page load
+// Initialize auth check
 document.addEventListener('DOMContentLoaded', checkAuth);

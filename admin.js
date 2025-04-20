@@ -47,7 +47,82 @@ function loadMockData() {
     renderTable('usersTable', users);
 }
 
+function renderUserTable(users) {
+    const table = document.getElementById('usersTable');
+    
+    const html = `
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>UID</th>
+                    <th>Phone</th>
+                    <th>Balance</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${users.map(user => `
+                    <tr>
+                        <td>${user.username}</td>
+                        <td>${user.id}</td>
+                        <td>${user.phone}</td>
+                        <td>₹${user.balance}</td>
+                        <td>${user.status}</td>
+                        <td>
+                            <button onclick="viewUserHistory('${user.id}')">View History</button>
+                        </td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+    table.innerHTML = html;
+}
+
+function viewUserHistory(userId) {
+    const user = JSON.parse(localStorage.getItem('users')).find(u => u.id === userId);
+    const bettingHistory = JSON.parse(localStorage.getItem('bettingHistory') || '[]')
+        .filter(bet => bet.userId === userId);
+
+    const modal = document.getElementById('userDetails');
+    const historyDiv = document.getElementById('userBettingHistory');
+    
+    historyDiv.innerHTML = `
+        <h4>${user.username}'s Betting History</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Game</th>
+                    <th>Amount</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${bettingHistory.map(bet => `
+                    <tr>
+                        <td>${new Date(bet.timestamp).toLocaleString()}</td>
+                        <td>${bet.game}</td>
+                        <td>₹${bet.amount}</td>
+                        <td class="${bet.status}">${bet.status === 'win' ? '+' + bet.winAmount : '-' + bet.amount}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+        <button onclick="document.getElementById('userDetails').style.display='none'">Close</button>
+    `;
+    
+    modal.style.display = 'block';
+}
+
 function renderTable(tableId, data) {
+    if (tableId === 'usersTable') {
+        renderUserTable(data);
+        return;
+    }
+    
     const table = document.getElementById(tableId);
     if (!data.length) return;
     
@@ -66,3 +141,19 @@ function renderTable(tableId, data) {
     `;
     table.innerHTML = html;
 }
+
+// Add search functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('userSearch');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const filteredUsers = users.filter(user => 
+                user.username.toLowerCase().includes(searchTerm) ||
+                user.phone.includes(searchTerm)
+            );
+            renderUserTable(filteredUsers);
+        });
+    }
+});

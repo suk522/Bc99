@@ -1,3 +1,62 @@
+
+/* Admin User Management Styles */
+.search-bar {
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.user-details-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-width: 80%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.user-details-modal button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #f44336;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-details-modal table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+.user-details-modal th,
+.user-details-modal td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.win {
+    color: #4CAF50;
+}
+
+.loss {
+    color: #f44336;
+}
+
 :root {
     --primary: #6a1b9a;
     --secondary: #9c27b0;

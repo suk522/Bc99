@@ -32,7 +32,14 @@
         
         <div id="users" class="tab-content">
             <h2>User Management</h2>
+            <div class="search-bar">
+                <input type="text" id="userSearch" placeholder="Search by username or phone...">
+            </div>
             <div class="admin-table" id="usersTable"></div>
+            <div id="userDetails" class="user-details-modal" style="display: none;">
+                <h3>User Betting History</h3>
+                <div id="userBettingHistory"></div>
+            </div>
         </div>
     </main>
 </body>

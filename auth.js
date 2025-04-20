@@ -92,6 +92,3 @@ function checkAuth() {
 
 // Check auth on page load
 document.addEventListener('DOMContentLoaded', checkAuth);
-
-// Check auth on page load
-document.addEventListener('DOMContentLoaded', checkAuth);

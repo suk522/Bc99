@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,36 +6,6 @@
     <title>Gaming Portal</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
-    <script src="auth.js"></script>
-    <main id="mainContent" style="display: none;">
-        <section class="hero">
-            <h1>Welcome to BC99</h1>
-        </section>
-        <div class="games">
-            <!-- Game content here -->
-        </div>
-    </main>
-    <nav class="navbar">
-        <div class="nav-links">
-            <a href="#" class="active">Home</a>
-            <a href="#">Activity</a>
-            <a href="wallet.html">Wallet</a>
-            <a href="account.html">Account</a>
-        </div>
-    </nav>
-    <script>
-        // Check auth on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const currentUser = localStorage.getItem('currentUser');
-            if (!currentUser) {
-                window.location.href = 'login.html';
-            } else {
-                document.getElementById('mainContent').style.display = 'block';
-            }
-        });
-    </script>
-</body>
 <body>
     <script src="auth.js"></script>
     <main id="mainContent" style="display: none;">
@@ -66,12 +35,6 @@
         </section>
     </main>
 
-    <script>
-        if (localStorage.getItem('currentUser')) {
-            document.getElementById('mainContent').style.display = 'block';
-        }
-    </script>
-
     <nav class="navbar">
         <div class="nav-links">
             <a href="#" class="active">Home</a>
@@ -81,7 +44,7 @@
             <a href="admin-login.html">Admin</a>
         </div>
     </nav>
-<script src="auth.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', checkAuth);
         document.addEventListener('click', e => {

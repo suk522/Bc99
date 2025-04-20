@@ -41,9 +41,3 @@ function handleLogout() {
     localStorage.removeItem('isLoggedIn');
     window.location.href = 'login.html';
 }
-
-function handleLogout() {
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('isLoggedIn');
-    window.location.href = 'login.html';
-}

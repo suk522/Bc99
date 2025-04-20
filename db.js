@@ -3,11 +3,17 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const uri = `mongodb+srv://sukhdevgodara964:${process.env.DB_PASSWORD}@cluster0.fil5pj9.mongodb.net/`;
-    await mongoose.connect(uri);
+    if (!process.env.MONGODB_URI) {
+      throw new Error('MONGODB_URI environment variable is not defined');
+    }
+    
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
     console.log('MongoDB connected successfully');
   } catch (error) {
-    console.error('MongoDB connection error:', error);
+    console.error('MongoDB connection error:', error.message);
     process.exit(1);
   }
 };

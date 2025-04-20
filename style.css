@@ -533,6 +533,79 @@ body {
     opacity: 0;
 }
 
+/* Account Page Styles */
+.account-page {
+    padding: 1rem;
+    margin-bottom: 70px;
+}
+
+.account-card {
+    background: var(--dark);
+    border-radius: 15px;
+    padding: 1.5rem;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.avatar {
+    font-size: 3rem;
+    background: var(--primary);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-info h2 {
+    margin: 0 0 0.5rem 0;
+}
+
+.uid, .balance {
+    color: rgba(255,255,255,0.8);
+    margin: 0.25rem 0;
+}
+
+.account-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.section {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.support-btn, .policy-btn {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    background: var(--primary);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 1rem;
+    background: #f44336;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
 /* Optimize general transitions */
 .nav-links a,
 button,

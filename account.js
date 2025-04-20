@@ -8,12 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const userName = document.getElementById('userName');
-    const userUID = document.getElementById('userUID');
-    const userBalance = document.getElementById('userBalance');
-
-    if (userName && userUID && userBalance) {
-
     // Update user information
     document.getElementById('userName').textContent = currentUser.name || 'User';
     document.getElementById('userUID').textContent = currentUser.uid || 'N/A';

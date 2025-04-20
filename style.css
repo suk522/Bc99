@@ -90,25 +90,32 @@ body {
 
 .navbar {
     background-color: var(--primary);
-    padding: 1rem;
+    padding: 0.8rem;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .nav-links {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .nav-links a {
     color: var(--light);
     text-decoration: none;
-    margin-left: 2rem;
-    transition: color 0.3s;
+    padding: 0.5rem;
+    transition: color 0.2s ease;
+    will-change: color;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .nav-links a:hover {

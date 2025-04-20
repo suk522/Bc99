@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BC99 - Register</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <main class="auth-page">
+        <div class="auth-card">
+            <h1>BC99</h1>
+            <p>Create new account</p>
+            <form id="registerForm" onsubmit="return handleRegistration(event)">
+                <input type="text" id="registerName" placeholder="Full Name" required>
+                <input type="text" id="registerPhone" placeholder="Phone Number" required>
+                <input type="password" id="registerPassword" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <div class="auth-links">
+                <a href="login.html">Already have an account?</a>
+                <a href="index.html">Back to home</a>
+            </div>
+        </div>
+    </main>
+    <script src="auth.js"></script>
+</body>
+</html>

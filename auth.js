@@ -62,27 +62,16 @@ let currentUser = JSON.parse(localStorage.getItem('currentUser'));
 let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
 function checkAuth() {
-    currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
-    const isLoginPage = window.location.pathname.endsWith('login.html');
-    const isRegisterPage = window.location.pathname.endsWith('register.html');
-    const isAuthPage = isLoginPage || isRegisterPage;
+    // Simple auth check - can be enhanced later
     const mainContent = document.getElementById('mainContent');
-
-    if (!currentUser || !isLoggedIn) {
-        if (!isAuthPage) {
-            window.location.href = 'login.html';
-            return;
-        }
-    } else if (isAuthPage) {
-        window.location.href = 'index.html';
-        return;
-    }
-
-    if (!isAuthPage && mainContent) {
+    if (mainContent) {
         mainContent.style.display = 'block';
     }
+}
+
+// Export for use in other files
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { checkAuth };
 }
 
 // Initialize auth check on page load

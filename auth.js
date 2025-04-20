@@ -64,19 +64,26 @@ function checkAuth() {
     const isLoginPage = window.location.pathname.endsWith('login.html');
     const isRegisterPage = window.location.pathname.endsWith('register.html');
     const isAuthPage = isLoginPage || isRegisterPage;
+    const mainContent = document.getElementById('mainContent');
 
     if (!currentUser || !isLoggedIn) {
         if (!isAuthPage) {
             window.location.href = 'login.html';
+            return;
         }
     } else if (isAuthPage) {
         window.location.href = 'index.html';
+        return;
     }
 
-    if (!isAuthPage) {
-        document.getElementById('mainContent').style.display = 'block';
+    if (!isAuthPage && mainContent) {
+        mainContent.style.display = 'block';
     }
 }
 
 // Initialize auth check
-document.addEventListener('DOMContentLoaded', checkAuth);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkAuth);
+} else {
+    checkAuth();
+}

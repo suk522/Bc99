@@ -13,7 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('userUID').textContent = currentUser.uid || 'N/A';
     document.getElementById('userBalance').textContent = `₹${currentUser.balance || 0}`;
 
-    // Add event listeners
+    // Modal handling
+    const modal = document.getElementById('bettingHistoryModal');
+    const closeBtn = document.querySelector('.close-btn');
+
+    closeBtn.onclick = () => {
+        modal.style.display = 'none';
+    }
+
+    window.onclick = (event) => {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    // Logout functionality
     const logoutBtn = document.querySelector('.logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
@@ -22,14 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'login.html';
         });
     }
-
-    const supportBtn = document.querySelector('.support-btn');
-    if (supportBtn) {
-        supportBtn.addEventListener('click', () => alert('Support service will be available soon!'));
-    }
-
-    const policyBtn = document.querySelector('.policy-btn');
-    if (policyBtn) {
-        policyBtn.addEventListener('click', () => alert('Privacy Policy will be available soon!'));
-    }
 });
+
+function showBettingHistory() {
+    const modal = document.getElementById('bettingHistoryModal');
+    const historyList = document.getElementById('bettingHistoryList');
+    const bettingHistory = JSON.parse(localStorage.getItem('bettingHistory') || '[]');
+    
+    historyList.innerHTML = bettingHistory.length ? 
+        bettingHistory.map(bet => `
+            <div class="history-item">
+                <span>Game: ${bet.game}</span>
+                <span>Amount: ₹${bet.amount}</span>
+                <span class="${bet.status}">${bet.status === 'win' ? '+' + bet.winAmount : '-' + bet.amount}</span>
+            </div>
+        `).join('') : 
+        '<div class="history-item">No betting history available</div>';
+    
+    modal.style.display = 'block';
+}

@@ -20,25 +20,19 @@
             </div>
             
             <div class="account-sections">
-                <div class="section">
-                    <h3>Betting History</h3>
-                    <div id="bettingHistory" class="history-list">
-                        <!-- History items will be populated by JavaScript -->
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <h3>Customer Service</h3>
-                    <button class="support-btn">Contact Support</button>
-                    <p>Support Hours: 24/7</p>
-                </div>
-                
-                <div class="section">
-                    <h3>Privacy & Policy</h3>
-                    <button class="policy-btn">View Policy</button>
-                </div>
-                
+                <button class="account-btn" onclick="showBettingHistory()">Betting History</button>
+                <button class="account-btn">Contact Support</button>
+                <button class="account-btn">Privacy Policy</button>
                 <button class="logout-btn">Logout</button>
+            </div>
+        </div>
+
+        <!-- Betting History Modal -->
+        <div id="bettingHistoryModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h3>Betting History</h3>
+                <div id="bettingHistoryList"></div>
             </div>
         </div>
     </main>

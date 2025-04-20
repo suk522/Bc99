@@ -20,6 +20,66 @@ function showTab(tabName) {
     
     document.getElementById(tabName).classList.add('active');
     document.querySelector(`button[onclick="showTab('${tabName}')"]`).classList.add('active');
+    
+    if (tabName === 'redEnvelopes') {
+        displayRedEnvelopes();
+    }
+}
+
+function generateRedEnvelopeCodes() {
+    const amount = parseFloat(document.getElementById('redEnvelopeAmount').value);
+    const count = parseInt(document.getElementById('redEnvelopeCount').value);
+    
+    if (!amount || !count) {
+        alert('Please enter valid amount and count');
+        return;
+    }
+    
+    const redEnvelopes = JSON.parse(localStorage.getItem('redEnvelopes') || '[]');
+    
+    for (let i = 0; i < count; i++) {
+        const code = Math.random().toString(36).substring(2, 8).toUpperCase();
+        redEnvelopes.push({
+            code,
+            amount,
+            createdAt: new Date().toISOString(),
+            redeemed: false
+        });
+    }
+    
+    localStorage.setItem('redEnvelopes', JSON.stringify(redEnvelopes));
+    displayRedEnvelopes();
+}
+
+function displayRedEnvelopes() {
+    const redEnvelopes = JSON.parse(localStorage.getItem('redEnvelopes') || '[]');
+    const table = document.getElementById('redEnvelopesTable');
+    
+    const html = `
+        <table>
+            <thead>
+                <tr>
+                    <th>Code</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Redeemed By</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${redEnvelopes.map(envelope => `
+                    <tr>
+                        <td>${envelope.code}</td>
+                        <td>₹${envelope.amount}</td>
+                        <td>${envelope.redeemed ? 'Redeemed' : 'Active'}</td>
+                        <td>${new Date(envelope.createdAt).toLocaleString()}</td>
+                        <td>${envelope.redeemedBy || '-'}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
+    table.innerHTML = html;
 }
 
 function loadMockData() {

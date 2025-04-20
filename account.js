@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -42,7 +41,7 @@ function showBettingHistory() {
     const modal = document.getElementById('bettingHistoryModal');
     const historyList = document.getElementById('bettingHistoryList');
     const bettingHistory = JSON.parse(localStorage.getItem('bettingHistory') || '[]');
-    
+
     historyList.innerHTML = bettingHistory.length ? 
         bettingHistory.map(bet => `
             <div class="history-item">
@@ -52,6 +51,36 @@ function showBettingHistory() {
             </div>
         `).join('') : 
         '<div class="history-item">No betting history available</div>';
-    
+
     modal.style.display = 'block';
+}
+
+function showRedEnvelopeForm() {
+    document.getElementById('redEnvelopeModal').style.display = 'block';
+}
+
+function closeRedEnvelopeModal() {
+    document.getElementById('redEnvelopeModal').style.display = 'none';
+}
+
+function redeemRedEnvelopeCode() {
+    const code = document.getElementById('redEnvelopeCode').value;
+    const redEnvelopes = JSON.parse(localStorage.getItem('redEnvelopes') || '[]');
+    const envelope = redEnvelopes.find(e => e.code === code && !e.redeemed);
+
+    if (envelope) {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        currentUser.balance = (parseFloat(currentUser.balance) + envelope.amount).toString();
+        localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+        envelope.redeemed = true;
+        envelope.redeemedBy = currentUser.uid;
+        envelope.redeemedAt = new Date().toISOString();
+        localStorage.setItem('redEnvelopes', JSON.stringify(redEnvelopes));
+
+        alert(`Successfully redeemed ₹${envelope.amount}!`);
+        closeRedEnvelopeModal();
+    } else {
+        alert('Invalid or already redeemed code');
+    }
 }

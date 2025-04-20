@@ -18,6 +18,17 @@
             <button class="tab-btn active" onclick="showTab('withdrawals')">Withdrawals</button>
             <button class="tab-btn" onclick="showTab('deposits')">Deposits</button>
             <button class="tab-btn" onclick="showTab('users')">Users</button>
+            <button class="tab-btn" onclick="showTab('redEnvelopes')">Red Envelopes</button>
+        </div>
+        
+        <div id="redEnvelopes" class="tab-content">
+            <h2>Red Envelope Management</h2>
+            <div class="red-envelope-form">
+                <input type="number" id="redEnvelopeAmount" placeholder="Amount (₹)">
+                <input type="number" id="redEnvelopeCount" placeholder="Number of codes">
+                <button onclick="generateRedEnvelopeCodes()">Generate Codes</button>
+            </div>
+            <div class="admin-table" id="redEnvelopesTable"></div>
         </div>
         
         <div id="withdrawals" class="tab-content active">

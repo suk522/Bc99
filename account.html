@@ -23,7 +23,19 @@
                 <button class="account-btn" onclick="showBettingHistory()">Betting History</button>
                 <a href="https://t.me/hayat00444" target="_blank" class="account-btn">Contact Support on Telegram</a>
                 <button class="account-btn">Privacy Policy</button>
+                <button class="account-btn" onclick="showBindBank()">Bind Bank Account</button>
+                <button class="account-btn" onclick="showRedEnvelopeForm()">Redeem Red Envelope</button>
                 <button class="logout-btn">Logout</button>
+            </div>
+
+            <!-- Red Envelope Modal -->
+            <div id="redEnvelopeModal" class="modal">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeRedEnvelopeModal()">&times;</span>
+                    <h3>Redeem Red Envelope Code</h3>
+                    <input type="text" id="redEnvelopeCode" placeholder="Enter code">
+                    <button onclick="redeemRedEnvelopeCode()">Redeem</button>
+                </div>
             </div>
         </div>
 

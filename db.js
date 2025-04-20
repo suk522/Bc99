@@ -1,7 +1,7 @@
 
-// Placeholder for future database implementation
+// Database connection utilities will be implemented here
 const db = {
-  connect: () => console.log('Using local storage for now')
+  connect: () => console.log('Database connection placeholder')
 };
 
 module.exports = db;

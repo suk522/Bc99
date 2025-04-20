@@ -10,12 +10,28 @@ function handleUserLogin(event) {
     if (user) {
         localStorage.setItem('currentUser', JSON.stringify(user));
         localStorage.setItem('isLoggedIn', 'true');
-        window.location.href = 'account.html';
+        window.location.href = 'index.html';
     } else {
-        alert('Invalid credentials');
+        alert('Invalid phone number or password');
     }
     return false;
 }
+
+function checkAuth() {
+    const currentUser = localStorage.getItem('currentUser');
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const isAuthPage = window.location.pathname.endsWith('login.html') || 
+                      window.location.pathname.endsWith('register.html');
+    
+    if (!currentUser && !isAuthPage) {
+        window.location.href = 'login.html';
+        return false;
+    }
+    return true;
+}
+
+// Check auth on page load
+document.addEventListener('DOMContentLoaded', checkAuth);
 
 function generateUID() {
     return Math.floor(10000 + Math.random() * 90000).toString();

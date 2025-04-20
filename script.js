@@ -101,21 +101,41 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Cache current page to prevent unnecessary refreshes
+// Optimize navigation handling
 let currentPage = window.location.pathname;
+let isNavigating = false;
 
 document.addEventListener('click', e => {
     const link = e.target.closest('a');
-    if (link && link.href && !link.target && !e.ctrlKey && !e.shiftKey) {
+    if (link && link.href && !link.target && !e.ctrlKey && !e.shiftKey && !isNavigating) {
         e.preventDefault();
         const newPage = new URL(link.href).pathname;
 
         if (newPage !== currentPage) {
+            isNavigating = true;
             document.body.classList.add('page-transition');
-            setTimeout(() => {
-                currentPage = newPage;
-                window.location = link.href;
-            }, 200);
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    currentPage = newPage;
+                    window.location = link.href;
+                    isNavigating = false;
+                }, 150);
+            });
         }
     }
+});
+
+// Preload adjacent pages
+document.addEventListener('DOMContentLoaded', () => {
+    const links = document.querySelectorAll('.nav-links a');
+    requestIdleCallback(() => {
+        links.forEach(link => {
+            if (link.href && link.href !== window.location.href) {
+                const prefetchLink = document.createElement('link');
+                prefetchLink.rel = 'prefetch';
+                prefetchLink.href = link.href;
+                document.head.appendChild(prefetchLink);
+            }
+        });
+    });
 });

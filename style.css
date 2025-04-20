@@ -99,6 +99,8 @@ body {
     z-index: 1000;
     transform: translateZ(0);
     will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .nav-links {
@@ -107,15 +109,19 @@ body {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+    transform: translateZ(0);
 }
 
 .nav-links a {
     color: var(--light);
     text-decoration: none;
     padding: 0.5rem;
-    transition: color 0.2s ease;
-    will-change: color;
+    transition: color 0.15s ease;
+    will-change: color, transform;
     -webkit-tap-highlight-color: transparent;
+    transform: translateZ(0);
+    position: relative;
+    font-weight: 500;
 }
 
 .nav-links a:hover {

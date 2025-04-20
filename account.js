@@ -1,6 +1,5 @@
-// Cache DOM elements
-let modals = {};
 let currentUser = null;
+const modals = {};
 
 document.addEventListener('DOMContentLoaded', () => {
     currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -11,43 +10,66 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Cache modal elements
-    ['bettingHistoryModal', 'redEnvelopeModal', 'bindBankModal', 'supportModal'].forEach(id => {
-        modals[id] = document.getElementById(id);
-    });
-
-    // Initialize all modals
-    initializeModals();
-
     // Update user information
     document.getElementById('userName').textContent = currentUser.name || 'User';
     document.getElementById('userUID').textContent = currentUser.uid || 'N/A';
     document.getElementById('userBalance').textContent = `₹${currentUser.balance || 0}`;
 
-    // Modal handling
-    const modal = document.getElementById('bettingHistoryModal');
-    const closeBtn = document.querySelector('.close-btn');
+    initializeModals();
+    setupLogoutButton();
+});
 
-    closeBtn.onclick = () => {
-        modal.style.display = 'none';
-    }
+function initializeModals() {
+    const modals = document.querySelectorAll('.modal');
+    const closeBtns = document.querySelectorAll('.close-btn');
+
+    closeBtns.forEach(btn => {
+        btn.onclick = () => {
+            btn.closest('.modal').style.display = 'none';
+        };
+    });
 
     window.onclick = (event) => {
-        if (event.target == modal) {
-            modal.style.display = 'none';
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
         }
+    };
+}
+
+function showBindBank() {
+    document.getElementById('bindBankModal').style.display = 'block';
+}
+
+function closeBankModal() {
+    document.getElementById('bindBankModal').style.display = 'none';
+}
+
+function bindBankAccount() {
+    const bankName = document.getElementById('bankName').value;
+    const accountNumber = document.getElementById('accountNumber').value;
+    const ifscCode = document.getElementById('ifscCode').value;
+
+    if (!bankName || !accountNumber || !ifscCode) {
+        alert('Please fill all fields');
+        return;
     }
 
-    // Logout functionality
-    const logoutBtn = document.querySelector('.logout-btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            localStorage.removeItem('currentUser');
-            localStorage.removeItem('isLoggedIn');
-            window.location.href = 'login.html';
-        });
-    }
-});
+    // Save bank details
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    currentUser.bankDetails = { bankName, accountNumber, ifscCode };
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+
+    alert('Bank account bound successfully');
+    closeBankModal();
+}
+
+function showCustomerSupport() {
+    document.getElementById('supportModal').style.display = 'block';
+}
+
+function closeSupportModal() {
+    document.getElementById('supportModal').style.display = 'none';
+}
 
 function showBettingHistory() {
     const modal = document.getElementById('bettingHistoryModal');
@@ -65,6 +87,17 @@ function showBettingHistory() {
         '<div class="history-item">No betting history available</div>';
 
     modal.style.display = 'block';
+}
+
+function setupLogoutButton() {
+    const logoutBtn = document.querySelector('.logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        });
+    }
 }
 
 function showRedEnvelopeForm() {
@@ -131,7 +164,7 @@ function closeRedEnvelopeModal() {
     document.getElementById('redEnvelopeModal').style.display = 'none';
 }
 
-function redeemRedEnvelopeCode() {
+function redeemRedEnvelopeCode2() { // Added 2 to disambiguate from the other redeemRedEnvelopeCode function.
     const code = document.getElementById('redEnvelopeCode').value.trim().toUpperCase();
     if (!code) {
         alert('Please enter a valid code');
@@ -166,58 +199,6 @@ function redeemRedEnvelopeCode() {
     alert(`Successfully redeemed ₹${envelope.amount}!`);
     closeRedEnvelopeModal();
     document.getElementById('redEnvelopeCode').value = '';
-}
-
-function initializeModals() {
-    const modals = document.querySelectorAll('.modal');
-    const closeBtns = document.querySelectorAll('.close-btn');
-
-    closeBtns.forEach(btn => {
-        btn.onclick = () => {
-            btn.closest('.modal').style.display = 'none';
-        };
-    });
-
-    window.onclick = (event) => {
-        if (event.target.classList.contains('modal')) {
-            event.target.style.display = 'none';
-        }
-    };
-}
-
-function showBindBank() {
-    document.getElementById('bindBankModal').style.display = 'block';
-}
-
-function closeBankModal() {
-    document.getElementById('bindBankModal').style.display = 'none';
-}
-
-function bindBankAccount() {
-    const bankName = document.getElementById('bankName').value;
-    const accountNumber = document.getElementById('accountNumber').value;
-    const ifscCode = document.getElementById('ifscCode').value;
-
-    if (!bankName || !accountNumber || !ifscCode) {
-        alert('Please fill all fields');
-        return;
-    }
-
-    // Save bank details
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    currentUser.bankDetails = { bankName, accountNumber, ifscCode };
-    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-    alert('Bank account bound successfully');
-    closeBankModal();
-}
-
-function showCustomerSupport() {
-    document.getElementById('supportModal').style.display = 'block';
-}
-
-function closeSupportModal() {
-    document.getElementById('supportModal').style.display = 'none';
 }
 
 function contactSupport(type) {
